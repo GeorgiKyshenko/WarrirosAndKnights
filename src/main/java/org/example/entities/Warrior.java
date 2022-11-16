@@ -1,23 +1,43 @@
 package org.example.entities;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Setter(AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Warrior {
 
+    private static final int ATTACK = 5;
     private int health;
-    private int attack;
 
     public Warrior() {
-        this.health = 50;
-        this.attack = 5;
+        this(50);
+    }
+
+    public int getAttack() {
+        return ATTACK;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public boolean isAlive() {
-        return health > 0;
+        return getHealth() > 0;
+    }
+
+
+    public void hit(Warrior opponent) {
+        opponent.takeDamage(getAttack());
+    }
+
+    protected void takeDamage(int attack) {
+        setHealth(getHealth() - attack);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{health=" + health + "}";
     }
 }
