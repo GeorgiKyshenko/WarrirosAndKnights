@@ -148,14 +148,14 @@ class BattleTest {
     @DisplayName("Defender Test 1: When attack is lower than defenders defense, his health stays the same")
     void testDefenderDoesntTakeDamage() {
 
-        Warrior warrior = Mockito.mock(Warrior.class);
-        Mockito.when(warrior.getAttack()).thenReturn(1);
-        Mockito.when(warrior.getHealth()).thenReturn(10);
+//        Warrior warrior = Mockito.mock(Warrior.class);
+//        Mockito.when(warrior.getAttack()).thenReturn(1);
+//        Mockito.when(warrior.getHealth()).thenReturn(10);
 
 
-//        Warrior rookie = new Rookie();
+        Warrior rookie = new Rookie();
 
-        Battle.fight(warrior, defender);
+        Battle.fight(rookie, defender);
 
         assertEquals(60, defender.getHealth());
     }

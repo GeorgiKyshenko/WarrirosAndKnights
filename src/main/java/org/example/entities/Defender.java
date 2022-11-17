@@ -1,7 +1,6 @@
 package org.example.entities;
 
 
-
 public class Defender extends Warrior {
 
     private static final int ATTACK = 3;
@@ -23,10 +22,9 @@ public class Defender extends Warrior {
 
     @Override
     protected void takeDamage(int attack) {
-        if (attack > getDefense()) {
-            setHealth(getHealth() - Math.abs(getDefense() - attack));
-        } else {
-            setHealth(getHealth());
+        if (attack <= getDefense()) {
+            return;
         }
+        super.takeDamage(Math.abs(getDefense() - attack));
     }
 }
