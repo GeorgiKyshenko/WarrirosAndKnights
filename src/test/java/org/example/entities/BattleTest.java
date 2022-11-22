@@ -28,6 +28,8 @@ class BattleTest {
 
     private Warrior defender;
 
+    private Warrior vampire;
+
 
     @BeforeEach
     public void setUp() {
@@ -37,6 +39,7 @@ class BattleTest {
         army1 = new Army();
         army2 = new Army();
         defender = new Defender();
+        vampire = new Vampire();
     }
 
     static class Rookie extends Warrior {
@@ -109,6 +112,27 @@ class BattleTest {
     @DisplayName("Fight 9: Defender against Knight - Defender loses")
     void testDefenderAgainstKnight() {
         assertFalse(Battle.fight(defender, knight));
+    }
+
+    @Test
+    @DisplayName("Fight 10: Defender against Vampire - Defender wins with 22 HP")
+    void testDefenderAgainstVampire() {
+
+        Battle.fight(defender, vampire);
+        assertEquals(22, defender.getHealth());
+        assertEquals(-1, vampire.getHealth());
+    }
+
+    @Test
+    @DisplayName("Fight 11: Vampire shouldn`t heal above his initial health")
+    void testVampireHealsWithHalfOfHisAttack() {
+
+        Warrior rookie = new Rookie();
+
+        vampire.hit(rookie);
+        vampire.hit(rookie);
+
+        assertEquals(40, vampire.getHealth());
     }
 
     @Test

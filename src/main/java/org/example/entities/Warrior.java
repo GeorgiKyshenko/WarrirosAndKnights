@@ -1,18 +1,21 @@
 package org.example.entities;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
+import org.example.entities.interfaces.IWarrior;
 
-@Setter(AccessLevel.PROTECTED)
-@AllArgsConstructor
-public class Warrior {
+import java.util.function.BiConsumer;
+
+public class Warrior implements IWarrior {
 
     private static final int ATTACK = 5;
     private int health;
+    private final int initialHealth;
 
     public Warrior() {
         this(50);
+    }
+
+    protected Warrior(int health) {
+        initialHealth = this.health = health;
     }
 
     public int getAttack() {
@@ -23,16 +26,21 @@ public class Warrior {
         return health;
     }
 
-    public boolean isAlive() {
-        return getHealth() > 0;
+    public void setHealth(int health) {
+        this.health = Math.min(initialHealth, health);
     }
 
+    protected void healBy(int healingPoints) {
+        setHealth(getHealth() + healingPoints);
+    }
 
-    public void hit(Warrior opponent) {
+    @Override
+    public void hit(IWarrior opponent) {
         opponent.takeDamage(getAttack());
     }
 
-    protected void takeDamage(int attack) {
+    @Override
+    public void takeDamage(int attack) {
         setHealth(getHealth() - attack);
     }
 

@@ -21,7 +21,7 @@ public class Defender extends Warrior {
     }
 
     @Override
-    protected void takeDamage(int attack) {
+    public void takeDamage(int attack) {
         if (attack <= getDefense()) {
             return;
         }

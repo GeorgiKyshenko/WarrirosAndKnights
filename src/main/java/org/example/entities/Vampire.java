@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import org.example.entities.interfaces.IWarrior;
+
 public class Vampire extends Warrior {
 
     private static final int ATTACK = 4;
@@ -19,21 +21,12 @@ public class Vampire extends Warrior {
     }
 
     @Override
-    public void hit(Warrior opponent) {
-        if (opponent instanceof Defender) {
-            hitDefender(opponent);
-        } else {
-            hitWarriorOrKnight(opponent);
-        }
-    }
-
-    private void hitDefender(Warrior defender) {
-        super.hit(defender);
-        this.setHealth(getHealth() + (Math.abs((((Defender) defender).getDefense() - getAttack())) * getVampirismPercentage() / 100));
-    }
-
-    private void hitWarriorOrKnight(Warrior opponent) {
+    public void hit(IWarrior opponent) {
+        int healthBefore = opponent.getHealth();
         super.hit(opponent);
-        this.setHealth(getHealth() + (getAttack() * getVampirismPercentage() / 100));
+        int healthAfter = opponent.getHealth();
+        int dealtDamage = healthBefore - healthAfter;
+        int healingPoints = (dealtDamage * 50) / 100;
+        healBy(healingPoints);
     }
 }

@@ -2,20 +2,21 @@ package org.example.battle;
 
 import org.example.entities.Army;
 import org.example.entities.Warrior;
+import org.example.entities.interfaces.IWarrior;
 
 import java.util.Iterator;
 
 public class Battle {
 
     /**
-     * Fighting between Warriors and Knights
+     * Fighting between different type of Warriors
      *
-     * @param warrior1 - might be a warrior or knight
-     * @param warrior2 - might be a warrior or knight
-     * @return if warrior1 is alive
+     * @param warrior1 - Warrior type1
+     * @param warrior2 - Warrior type2
+     * @return if warrior1 is alive or dead
      */
 
-    public static boolean fight(Warrior warrior1, Warrior warrior2) {
+    public static boolean fight(IWarrior warrior1, IWarrior warrior2) {
 
         while (true) {
 
@@ -40,8 +41,8 @@ public class Battle {
 
     public static boolean fight(Army army1, Army army2) {
 
-        Iterator<Warrior> it1 = army1.firstAliveIterator();
-        Iterator<Warrior> it2 = army2.firstAliveIterator();
+        Iterator<IWarrior> it1 = army1.firstAliveIterator();
+        Iterator<IWarrior> it2 = army2.firstAliveIterator();
 
         while (it1.hasNext() && it2.hasNext()) {
             fight(it1.next(), it2.next());
