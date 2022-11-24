@@ -1,10 +1,17 @@
 package org.example.entities;
 
-import org.example.entities.interfaces.IWarrior;
-
 interface WarriorBehind {
     IWarrior getWarriorBehind();
 }
+
+//interface DealtDamageAware extends IWarrior {
+//    default int hitAndReportDamage(IWarrior opponent) {
+//        int healthBefore = opponent.getHealth();
+//        super.hit(opponent);
+//        int healthAfter = opponent.getHealth();
+//        return healthBefore - healthAfter;
+//    }
+//}
 
 public class Lancer extends Warrior {
 
@@ -25,6 +32,7 @@ public class Lancer extends Warrior {
     public void hit(IWarrior opponent) {
         int healthBefore = opponent.getHealth();
         super.hit(opponent);
+
         if (opponent instanceof WarriorBehind opponentWithNext) {
             IWarrior nextWarrior = opponentWithNext.getWarriorBehind();
             if (nextWarrior != null) {

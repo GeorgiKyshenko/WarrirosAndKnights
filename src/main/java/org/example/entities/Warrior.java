@@ -1,9 +1,5 @@
 package org.example.entities;
 
-import org.example.entities.interfaces.IWarrior;
-
-import java.util.function.BiConsumer;
-
 public class Warrior implements IWarrior {
 
     private static final int ATTACK = 5;
@@ -18,6 +14,7 @@ public class Warrior implements IWarrior {
         initialHealth = this.health = health;
     }
 
+    @Override
     public int getAttack() {
         return ATTACK;
     }
@@ -26,17 +23,12 @@ public class Warrior implements IWarrior {
         return health;
     }
 
-    public void setHealth(int health) {
+    private void setHealth(int health) {
         this.health = Math.min(initialHealth, health);
     }
 
     protected void healBy(int healingPoints) {
         setHealth(getHealth() + healingPoints);
-    }
-
-    @Override
-    public void hit(IWarrior opponent) {
-        opponent.takeDamage(getAttack());
     }
 
     @Override

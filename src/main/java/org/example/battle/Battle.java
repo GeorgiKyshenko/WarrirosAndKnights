@@ -1,12 +1,17 @@
 package org.example.battle;
 
 import org.example.entities.Army;
-import org.example.entities.Warrior;
-import org.example.entities.interfaces.IWarrior;
+import org.example.entities.IWarrior;
 
 import java.util.Iterator;
 
 public class Battle {
+
+//    private static PublisherImpl publisher;
+//
+//    public Battle(PublisherImpl publisher) {
+//        Battle.publisher = publisher;
+//    }
 
     /**
      * Fighting between different type of Warriors
@@ -20,11 +25,17 @@ public class Battle {
 
         while (true) {
 
-            if (warrior1.isAlive()) warrior1.hit(warrior2);
-            else break;
+            if (warrior1.isAlive()) {
+                warrior1.hit(warrior2);
+            } else {
+                break;
+            }
 
 
-            if (warrior2.isAlive()) warrior2.hit(warrior1);
+            if (warrior2.isAlive()){
+                warrior2.hit(warrior1);
+//                publisher.notifyObserver();
+            }
             else break;
 
         }

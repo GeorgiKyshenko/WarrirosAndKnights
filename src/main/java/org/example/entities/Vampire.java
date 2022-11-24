@@ -1,7 +1,5 @@
 package org.example.entities;
 
-import org.example.entities.interfaces.IWarrior;
-
 public class Vampire extends Warrior {
 
     private static final int ATTACK = 4;
@@ -20,13 +18,14 @@ public class Vampire extends Warrior {
         return VAMPIRISM_PERCENTAGE;
     }
 
+
     @Override
     public void hit(IWarrior opponent) {
         int healthBefore = opponent.getHealth();
         super.hit(opponent);
         int healthAfter = opponent.getHealth();
         int dealtDamage = healthBefore - healthAfter;
-        int healingPoints = (dealtDamage * 50) / 100;
+        int healingPoints = (dealtDamage * getVampirismPercentage()) / 100;
         healBy(healingPoints);
     }
 }
